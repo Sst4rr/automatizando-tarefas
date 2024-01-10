@@ -1,52 +1,52 @@
-#  já peço perdão pela organização do codigo
-
+#  código simples de uma automação de cadastro de produtos
+# simple code of a product registration automation
 
 # passo 1 - entrar no sistema da empresa
+# step 1 - enter the company system
 
 import pyautogui
 import time
- # # https://dlp.hashtagtreinamentos.com/python/intensivao/login
-pyautogui.PAUSE = 0.5 # pausa de 1 segundo a cada comando
+import pandas
+
+
+pyautogui.PAUSE = 0.5 # pausa de 1 segundo a cada comando \\ pause of 1 second after each command
+
+#explicações de códigos do auto gui // explanations of auto gui codes
 #clicar : pyautogui.click(x,y)
 #digitar: pyautogui.write('texto')
 #pressionar uma tela: pyautogui.press('enter')
 #apertar: pyautogui.hotkey
 
-#apertar a tecla do windows
+#apertar a tecla do windows // press the windows key
 pyautogui.press("win")
-
-#digitar o nome do programa
+#digitar o nome do programa // type the program name
 pyautogui.write("chrome")
-
-
-
-#apertar enter
+#apertar enter // press enter
 pyautogui.press("enter")
-
-#escrever link
+#escrever link do site // write the site link
 pyautogui.write("https://dlp.hashtagtreinamentos.com/python/intensivao/login")
-#dar enter
-
+#dar enter // press enter
 pyautogui.press("enter")
-
 time.sleep(1) #esperar tantos segundos em um local específico do código
+                # wait some seconds in a specific location of the code
 
 # Passo 2 - fazer login
-pyautogui.click(x=230, y=429) #clica no local do email
-pyautogui.write("thaisestermedeirosgomes@gmail.com") #digita o email
-pyautogui.press("tab")#aperta a tecla tab para descer para a próxima linha
-pyautogui.write("teste123") #digita a senha
-pyautogui.press("enter") #aperta enter para fazer o login
-time.sleep(1) #espera o site carregar
+pyautogui.click(x=230, y=429) #clica no local do email // click on the email location
+pyautogui.write("thaisestermedeirosgomes@gmail.com") #digita o email // type the email
+pyautogui.press("tab")#aperta a tecla tab para descer para a próxima linha // press the tab key to go down to the next line
+pyautogui.write("teste123") #digita a senha // type the password
+pyautogui.press("enter") #aperta enter para fazer o login // press enter to login
+time.sleep(1) #espera o site carregar // wait the site fully load
 
-# Passo 3 - important a vase de dados
-import pandas
+# Passo 3 - importa a base de dados // import the database
 
-tabela = pandas.read_csv("produtos.csv")
-print(tabela)
+tabela = pandas.read_csv("produtos.csv") #associa o csv a uma variável usando a biblioteca pandas // associate the csv to a variable using the pandas library
+#print(tabela) #imprime a tabela para verificação // print the table for verification
 
-# Passo 4 - Cadastrar um produto 
+# Passo 4 - Cadastrar os produtos // register the products
 
+#para cada linha da tabela, ele associa ao indice e preenche os campos 
+#// for each line of the table, it associates with the index and fills in the fields
 for linha in tabela.index:
     pyautogui.click(x=168, y=316)
     codigo = tabela.loc[linha, "codigo"]
@@ -82,5 +82,3 @@ for linha in tabela.index:
     pyautogui.press("enter")
 
     pyautogui.scroll(50000)
-
-# Passo 5 - Repetir isso até acabar a base de dados
